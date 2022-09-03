@@ -1,5 +1,18 @@
-import { Router } from "express"
+import { Router } from "express";
+import UserRepository from "../../repositories/User/UserRepository";
 
-const authRouter = Router()
+const authRouter = Router();
 
-export {authRouter}
+authRouter.post("/register", async (request, response) => {
+  const {
+    name,
+    email,
+    password,
+  }: { name: string; email: string; password: string } = request.body;
+
+  const user = await UserRepository.create({user: {name, email, password}})
+
+  return response.status(200).json({user})
+});
+
+export { authRouter };
