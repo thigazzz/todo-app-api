@@ -27,6 +27,9 @@ model Task {
   title     String
   situation Boolean
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
   User   User @relation(fields: [userId], references: [id])
   userId Int
 }
