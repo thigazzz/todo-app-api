@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 import UserRepository from "../../repositories/User/UserRepository";
+import { generateHash } from "../../utils/generateHash";
 
 class AuthController {
   async register(request: Request, response: Response): Promise<Response> {
@@ -11,7 +12,7 @@ class AuthController {
     }: { name: string; email: string; password: string } = request.body;
 
     const user = await UserRepository.create({
-      user: { name, email, password: await bcrypt.hash(password, 10)},
+      user: { name, email, password: await generateHash(password, 10) },
     });
 
     return response.status(200).json({ user });
@@ -27,7 +28,7 @@ class AuthController {
         .status(400)
         .json({ message: "email or password invalids!" });
 
-    if (!await bcrypt.compare(password, userExists.password))
+    if (!(await bcrypt.compare(password, userExists.password)))
       return response
         .status(400)
         .json({ message: "email or password invalids!" });
@@ -36,4 +37,4 @@ class AuthController {
   }
 }
 
-export default new AuthController()
+export default new AuthController();
