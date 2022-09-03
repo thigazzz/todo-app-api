@@ -27,6 +27,6 @@ model Task {
   title     String
   situation Boolean
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  User   User @relation(fields: [userId], references: [id])
+  userId Int
 }
