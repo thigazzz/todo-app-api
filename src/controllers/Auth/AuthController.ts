@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import bcrypt from 'bcrypt'
 import UserRepository from "../../repositories/User/UserRepository";
 
 class AuthController {
@@ -10,7 +11,7 @@ class AuthController {
     }: { name: string; email: string; password: string } = request.body;
 
     const user = await UserRepository.create({
-      user: { name, email, password },
+      user: { name, email, password: await bcrypt.hash(password, 10)},
     });
 
     return response.status(200).json({ user });
@@ -26,7 +27,7 @@ class AuthController {
         .status(400)
         .json({ message: "email or password invalids!" });
 
-    if (!(userExists.password === password))
+    if (!await bcrypt.compare(password, userExists.password))
       return response
         .status(400)
         .json({ message: "email or password invalids!" });
