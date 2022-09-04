@@ -15,3 +15,7 @@ export interface TaskRepositoryDeleteDTO {
     id: number
     userId: number;
 }
+export interface TaskRepositoryIdDTO {
+    id: number;
+    userId: number
+}

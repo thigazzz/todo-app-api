@@ -1,6 +1,6 @@
 import {Prisma, PrismaClient, Task} from '@prisma/client'
 import { urlencoded } from 'express';
-import { TaskRepositoryCreateDTO, TaskRepositoryDeleteDTO, TaskRepositoryReadDTO, TaskRepositoryUpdateDTO } from "../../interfaces/DTOs/repositories/TaskRepositoryDTO";
+import { TaskRepositoryCreateDTO, TaskRepositoryDeleteDTO, TaskRepositoryIdDTO, TaskRepositoryReadDTO, TaskRepositoryUpdateDTO } from "../../interfaces/DTOs/repositories/TaskRepositoryDTO";
 
 const prisma = new PrismaClient()
 
@@ -44,5 +44,14 @@ class TaskRepository {
             }
         })
         return deletedTask
+    }
+    async findById({id,userId}: TaskRepositoryIdDTO): Promise<Task | null> {
+        const task = await prisma.task.findUnique({
+            where: {
+                id,
+                userId
+            }
+        })
+        return task
     }
 }
