@@ -8,7 +8,7 @@ export interface TaskRepositoryReadDTO {
 }
 export interface TaskRepositoryUpdateDTO {
     id: number;
-    task: ITask;
+    task: Omit<ITask, 'userId'>;
 }
 export interface TaskRepositoryDeleteDTO {
     id: number

@@ -18,6 +18,22 @@ taskRouter.post('/list/:userId', async (request, response) => {
     const tasks = await UserRepository.readAllTasks({id: Number(userId)})
 
     return response.status(200).json({tasks})
-})  
+})
+taskRouter.put('/update/:id', async (request, response) => {
+    const {id} = request.params
+    const {title, situation} = request.body
+
+    const updatedTask = await TaskRepository.update({id: Number(id), task: {title, situation}})
+
+    return response.status(200).json({updatedTask})
+
+})
+taskRouter.delete('/delete/:id', async (request, response) => {
+    const {id} = request.params
+
+    const deletedTask = await TaskRepository.delete({id: Number(id)})
+
+    return response.status(200).json({deletedTask})
+})
 
 export {taskRouter}
