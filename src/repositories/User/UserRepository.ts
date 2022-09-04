@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient, PrismaPromise, User } from "@prisma/client";
-import { UserRepositoryCreateDTO, UserRepositoryDeleteDTO, UserRepositoryFindByEmailDTO, UserRepositoryUpdateDTO } from "../../DTOs/repositories/UserRepositoryDTO";
+import { UserRepositoryCreateDTO, UserRepositoryDeleteDTO, UserRepositoryFindByEmailDTO, UserRepositoryUpdateDTO } from "../../interfaces/DTOs/repositories/UserRepositoryDTO";
 
 const prisma = new PrismaClient()
 

@@ -1,8 +1,10 @@
-import { ITask } from "../../interfaces/models/ITask";
+import { ITask } from "../../../interfaces/models/ITask";
 
 export interface TaskRepositoryCreateDTO {
-    userId: number;
     task: ITask;
+}
+export interface TaskRepositoryReadDTO {
+    userId: number;
 }
 export interface TaskRepositoryUpdateDTO {
     id: number;

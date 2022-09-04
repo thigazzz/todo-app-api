@@ -1,4 +1,4 @@
-import { IUser } from "../../interfaces/models/IUser";
+import { IUser } from "../../../interfaces/models/IUser";
 
 export interface UserRepositoryCreateDTO {
     user: IUser;
