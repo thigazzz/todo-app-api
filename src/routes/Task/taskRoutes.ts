@@ -1,5 +1,6 @@
 import { Router } from "express";
 import TaskRepository from "../../repositories/Task/TaskRepository";
+import UserRepository from "../../repositories/User/UserRepository";
 
 const taskRouter = Router()
 
@@ -14,7 +15,7 @@ taskRouter.post('/add/:userId', async (request, response) => {
 taskRouter.post('/list/:userId', async (request, response) => {
     const {userId} = request.params
 
-    const tasks = await TaskRepository.read({userId: Number(userId)})
+    const tasks = await UserRepository.readAllTasks({id: Number(userId)})
 
     return response.status(200).json({tasks})
 })  

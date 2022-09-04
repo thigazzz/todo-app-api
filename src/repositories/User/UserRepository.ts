@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient, PrismaPromise, User } from "@prisma/client";
-import { UserRepositoryCreateDTO, UserRepositoryDeleteDTO, UserRepositoryFindByEmailDTO, UserRepositoryUpdateDTO } from "../../interfaces/DTOs/repositories/UserRepositoryDTO";
+import { UserRepositoryCreateDTO, UserRepositoryDeleteDTO, UserRepositoryFindByEmailDTO, UserRepositoryReadAllTasksDTO, UserRepositoryUpdateDTO } from "../../interfaces/DTOs/repositories/UserRepositoryDTO";
 
 const prisma = new PrismaClient()
 
@@ -45,6 +45,19 @@ class UserRepository {
             }
         })
         return user
+    }
+
+    //tasks relational
+    async readAllTasks({id}: UserRepositoryReadAllTasksDTO) {
+        const tasks = await prisma.user.findMany({
+            where: {
+                id
+            },
+            select: {
+                tasks: true
+            }
+        })
+        return tasks
     }
 
 }
