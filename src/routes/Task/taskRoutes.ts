@@ -1,39 +1,20 @@
 import { Router } from "express";
-import TaskRepository from "../../repositories/Task/TaskRepository";
-import UserRepository from "../../repositories/User/UserRepository";
+import TaskController from "../../controllers/Task/TaskController";
 
 const taskRouter = Router()
 
 taskRouter.post('/add/:userId', async (request, response) => {
-    const {userId} = request.params
-    const {title} = request.body
-
-    const task = await TaskRepository.create({task: {title, situation: false, userId: Number(userId)}})
-
-    return response.status(200).json({task})
+    return TaskController.add(request, response)
 })
 taskRouter.post('/list/:userId', async (request, response) => {
-    const {userId} = request.params
-
-    const tasks = await UserRepository.readAllTasks({id: Number(userId)})
-
-    return response.status(200).json({tasks})
+    return TaskController.readTasks(request, response)
 })
 taskRouter.put('/update/:id', async (request, response) => {
-    const {id} = request.params
-    const {title, situation} = request.body
-
-    const updatedTask = await TaskRepository.update({id: Number(id), task: {title, situation}})
-
-    return response.status(200).json({updatedTask})
+    return TaskController.update(request, response)
 
 })
 taskRouter.delete('/delete/:id', async (request, response) => {
-    const {id} = request.params
-
-    const deletedTask = await TaskRepository.delete({id: Number(id)})
-
-    return response.status(200).json({deletedTask})
+    return TaskController.delete(request, response)
 })
 
 export {taskRouter}
