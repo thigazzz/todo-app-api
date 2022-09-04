@@ -15,15 +15,15 @@ class TaskRepository {
         })
         return task
     }
-    async read({userId}: TaskRepositoryReadDTO): Promise<Task[]> {
+    async read({id}: TaskRepositoryReadDTO): Promise<Task[]> {
         const tasks = await prisma.task.findMany({
             where: {
-                userId
+                id
             }
         })
         return tasks
     }
-    async update({id, userId ,task: {title, situation}}: TaskRepositoryUpdateDTO): Promise<Task> {
+    async update({id ,task: {title, situation}}: TaskRepositoryUpdateDTO): Promise<Task> {
         const updatedTask = await prisma.task.update({
             data: {
                 title,
@@ -31,27 +31,26 @@ class TaskRepository {
             },
             where: {
                 id,
-                userId
             }
         })
         return updatedTask
     }
-    async delete({id, userId}: TaskRepositoryDeleteDTO): Promise<Task> {
+    async delete({id}: TaskRepositoryDeleteDTO): Promise<Task> {
         const deletedTask = await prisma.task.delete({
             where: {
                 id,
-                userId
             }
         })
         return deletedTask
     }
-    async findById({id,userId}: TaskRepositoryIdDTO): Promise<Task | null> {
+    async findById({id}: TaskRepositoryIdDTO): Promise<Task | null> {
         const task = await prisma.task.findUnique({
             where: {
                 id,
-                userId
             }
         })
         return task
     }
 }
+
+export default new TaskRepository()

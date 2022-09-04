@@ -4,18 +4,15 @@ export interface TaskRepositoryCreateDTO {
     task: ITask;
 }
 export interface TaskRepositoryReadDTO {
-    userId: number;
+    id: number;
 }
 export interface TaskRepositoryUpdateDTO {
     id: number;
-    userId: number;
     task: ITask;
 }
 export interface TaskRepositoryDeleteDTO {
     id: number
-    userId: number;
 }
 export interface TaskRepositoryIdDTO {
     id: number;
-    userId: number
 }
