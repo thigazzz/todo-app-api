@@ -17,8 +17,6 @@ export const authenticateToken = (request: Request, response: Response, next: Ne
     jwt.verify(token, String(process.env.JWT_SECRET), (error, decoded) => {
         if (error) return response.status(400).json({error: 'Token invalid'})
 
-        console.log(decoded)
-
         request.user = (<any>decoded)
 
         next()

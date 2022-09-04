@@ -6,6 +6,10 @@ class TaskController {
   async add(request: Request, response: Response): Promise<Response> {
     const { userId } = request.params;
     const { title } = request.body;
+    const {id} = request.user
+
+
+    if (id !== userId) return response.status(400).json({error: 'Not access'})
 
     const task = await TaskRepository.create({
       task: { title, situation: false, userId: Number(userId) },
