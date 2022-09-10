@@ -9,5 +9,8 @@ authRouter.post("/register", async (request, response) => {
 authRouter.get("/login", async (request, response) => {
   return AuthController.login(request, response);
 });
+authRouter.get('refresh', (request, response) => {
+  
+})
 
 export { authRouter };

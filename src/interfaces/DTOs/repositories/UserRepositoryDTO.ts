@@ -13,6 +13,9 @@ export interface UserRepositoryDeleteDTO {
 export interface UserRepositoryFindByEmailDTO {
     email: string
 }
+export interface UserRepositoryFindByEmailDTO {
+    
+}
 export interface UserRepositoryReadAllTasksDTO {
     id: number
 }
