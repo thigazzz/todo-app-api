@@ -91,6 +91,12 @@ class AuthController {
 
     return response.json({ user, token: await generateToken(String(user.id)) });
   }
+
+  async refresh(request: Request, response: Response): Promise<Response> {
+    const {user} = request
+
+    return response.json({token: generateToken(String(user.id))})
+  }
 }
 
 export default new AuthController();
