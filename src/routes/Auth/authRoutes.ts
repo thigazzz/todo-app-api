@@ -9,6 +9,9 @@ authRouter.post("/register", async (request, response) => {
 authRouter.post("/login", async (request, response) => {
   return AuthController.login(request, response);
 });
+authRouter.get("/active_account/:token", async (request, response) => {
+  return AuthController.verifyAccount(request, response);
+});
 authRouter.get('refresh', (request, response) => {
   
 })
